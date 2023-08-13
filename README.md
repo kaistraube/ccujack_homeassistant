@@ -22,7 +22,7 @@ Functions of hass_discovery_ccu.py:
 # Pre-Requirements
 - CCU-Jack is installed on CCU
 - MQTT Integration is installed on HomeAssistant (only one MQTT broker could be configured on HomeAssistant, so both CCU-Jack and HomeAssistant must use the same)
-- Tool 'mosquitto_pub' to send messages to broker by hass_discovery_ccu.py is installed, e.g. Ubuntu: apt-get install mosquitto-clients
+- Tool 'mosquitto_pub' is installed to publish messages to broker by hass_discovery_ccu.py, e.g. Ubuntu: apt-get install mosquitto-clients
 
 # Configuration
 HomeAssistant subscribes topics with auto-discovery data (published by hass_discovery_ccu.py) from "homeassistant".
@@ -31,7 +31,7 @@ CCU-Jack publishes CCU states (subscribed by HomeAssistant's auto-discovery info
 
 CCU-Jack subscribes control data (published by HomeAssistant) from "ccu-jack/device/set", e.g. to switch a light.
 
-![MQTT-Explorer](/pics/mqtt-explorer.png "MQTT Explorer")
+![MQTT-Explorer](/pics/mqtt-explorer-small.png "MQTT Explorer")
 
 ## hass_discovery_ccu.py
 Before using the script to publish the auto-discovery to MQTT broker, connection details and other data needs to be set in configuration file "hass_discovery_ccu.json"
