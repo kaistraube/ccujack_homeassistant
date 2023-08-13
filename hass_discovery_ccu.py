@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import os
 import json
 import requests
@@ -252,8 +253,15 @@ class Ccu2Hass:
 
 
 if __name__ == '__main__':
-   ccujack_hass_discovery = Ccu2Hass()
-   ccujack_hass_discovery.SendDiscovery()
-#   ccujack_hass_discovery.SendAll()
+   if len(sys.argv) == 1:
+      sys.argv.append("-h")
+   parser = argparse.ArgumentParser()
+   parser.add_argument('-d', '--discovery', help="send HomeAssistant auto-discovery data to MQTT broker", action='store_true')
+   parser.add_argument('-a', '--all', help="send all CCU channels/states to MQTT broker", action='store_true')
+   args = parser.parse_args()
 
-   print('done')
+   ccujack_hass_discovery = Ccu2Hass()
+   if args.discovery:
+      ccujack_hass_discovery.SendDiscovery()
+   elif args.all:
+      ccujack_hass_discovery.SendAll()

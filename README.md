@@ -33,23 +33,6 @@ CCU-Jack subscribes control data (published by HomeAssistant) from "ccu-jack/dev
 
 ![MQTT-Explorer](/pics/mqtt-explorer-small.png "MQTT Explorer")
 
-## hass_discovery_ccu.py
-Before using the script to publish the auto-discovery to MQTT broker, connection details and other data needs to be set in configuration file "hass_discovery_ccu.json"
-
-    "config": {
-       "hass_mqtt_host": "<IP-Address of MQTT broker>",
-       "hass_mqtt_port": "<Port of MQTT broker>",
-       "hass_mqtt_user": "<user>",
-       "hass_mqtt_pass": "<password>",
-       "hass_mqtt_qos": 1,
-       "hass_mqtt_retain": true,
-       "hass_mqtt_topic_prefix": "homeassistant",
-       "ccu_mqtt_topic_prefix": "ccu-jack/device",
-       "url_ccu_jack": "http://<IP-Address of CCU-Jack>:<Port of CCU-Jack>",
-       "use_ccu_device_title": true,
-       "use_ccu_channel_title": false
-    },
-
 ## CCU-Jack
 In my case I use MQTT broker [EMQX](https://www.emqx.io/) that is already connected to HomeAssistant. CCU-Jack publishes to MQTT broker for HomeAssistant (Outgoing) and subscribes topics to control CCU (Incoming) by using CCU-Jack's [MQTT-Bridge](https://github.com/mdzio/ccu-jack/wiki/MQTT-Bridge) functionally.
 
@@ -82,6 +65,33 @@ In my case I use MQTT broker [EMQX](https://www.emqx.io/) that is already connec
         }
       ]
     }
+
+## hass_discovery_ccu.py
+Before using the script to publish the auto-discovery to MQTT broker, connection details and other data needs to be set in configuration file "hass_discovery_ccu.json"
+
+    "config": {
+       "hass_mqtt_host": "<IP-Address of MQTT broker>",
+       "hass_mqtt_port": "<Port of MQTT broker>",
+       "hass_mqtt_user": "<user>",
+       "hass_mqtt_pass": "<password>",
+       "hass_mqtt_qos": 1,
+       "hass_mqtt_retain": true,
+       "hass_mqtt_topic_prefix": "homeassistant",
+       "ccu_mqtt_topic_prefix": "ccu-jack/device",
+       "url_ccu_jack": "http://<IP-Address of CCU-Jack>:<Port of CCU-Jack>",
+       "use_ccu_device_title": true,
+       "use_ccu_channel_title": false
+    },
+
+Usage:
+
+    user@host:~$ python3 hass_discovery_ccu.py
+    usage: hass_discovery_ccu.py [-h] [-d] [-a]
+
+    options:
+      -h, --help       show this help message and exit
+      -d, --discovery  send HomeAssistant auto-discovery data to MQTT broker
+      -a, --all        send all CCU channels/states to MQTT broker
 
 ## HomeAssistant
 When auto-discovery data are pushed to topic "homeassistant", HomeAssistant creates the devices and entities immediately.
