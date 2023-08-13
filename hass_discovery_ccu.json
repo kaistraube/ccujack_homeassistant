@@ -1,0 +1,152 @@
+{
+   "config": {
+      "hass_mqtt_host": "",
+      "hass_mqtt_port": "",
+      "hass_mqtt_user": "",
+      "hass_mqtt_pass": "",
+      "hass_mqtt_qos": 1,
+      "hass_mqtt_retain": true,
+      "hass_mqtt_topic_prefix": "homeassistant",
+      "ccu_mqtt_topic_prefix": "ccu-jack/device",
+      "url_ccu_jack": "http://",
+      "use_ccu_device_title": true,
+      "use_ccu_channel_title": false
+   },
+   "parameter": {
+      "paramater_all_devices": {
+         "0": [
+            { "type": "CONFIG_PENDING", "entity_type": "binary_sensor", "entity_name": "config_pending", "category": "diagnostic", "enabled": false },
+            { "type": "UPDATE_PENDING", "entity_type": "binary_sensor", "entity_name": "update_pending", "category": "diagnostic", "enabled": false },
+            { "type": "DUTY_CYCLE",     "entity_type": "binary_sensor", "entity_name": "duty_cicle",     "category": "diagnostic", "enabled": false },
+            { "type": "RSSI_DEVICE",    "entity_type": "sensor",        "entity_name": "rssi_device",    "category": "diagnostic", "enabled": false, "state_class": "total" },
+            { "type": "RSSI_PEER",      "entity_type": "sensor",        "entity_name": "rssi_peer",      "category": "diagnostic", "enabled": false, "state_class": "total" }
+         ]
+      },
+      "parameter_per_device": {
+         "HmIP-RFUSB": {
+            "0": [
+               { "type": "DUTY_CYCLE_LEVEL",    "entity_type": "sensor", "entity_name": "duty_cicle_level",    "category": "diagnostic", "availability_check": false, "unit": "%" },
+               { "type": "CARRIER_SENSE_LEVEL", "entity_type": "sensor", "entity_name": "carrier_sense_level", "category": "diagnostic", "availability_check": false, "unit": "%" },
+               { "type": "UPDATE",              "entity_type": "update", "entity_name": "update",              "category": "diagnostic", "availability_check": false }
+            ]
+         },
+         "HmIP-SMI": {
+            "0": [
+               { "type": "LOW_BAT",            "entity_type": "binary_sensor", "entity_name": "battery",           "category": "diagnostic", "device_class": "battery" },
+               { "type": "SABOTAGE",           "entity_type": "binary_sensor", "entity_name": "sabotage",          "category": "diagnostic", "enabled": false },
+               { "type": "OPERATING_VOLTAGE",  "entity_type": "sensor",        "entity_name": "operating_voltage", "category": "diagnostic", "enabled": false, "device_class": "voltage", "unit": "V" },
+               { "type": "UPDATE",             "entity_type": "update",        "entity_name": "update",            "category": "diagnostic" }
+            ],
+            "1": [
+               { "type": "ILLUMINATION",            "entity_type": "sensor", "entity_name": "illumination",         "device_class": "illuminance",   "unit": "lx" },
+               { "type": "MOTION",                  "entity_type": "binary_sensor", "entity_name": "motion", "device_class": "motion" },
+               { "type": "MOTION_DETECTION_ACTIVE", "entity_type": "binary_sensor", "entity_name": "motion_detection_active", "category": "diagnostic", "enabled": false },
+               { "type": "MOTION_DETECTION_ACTIVE", "entity_type": "switch",        "entity_name": "motion_detection_active" }
+            ]
+         },
+         "HMIP-PSM": {
+            "0": [
+               { "type": "ACTUAL_TEMPERATURE", "entity_type": "sensor", "entity_name": "temperature", "device_class": "temperature", "unit": "°C", "enabled": false },
+               { "type": "UPDATE",             "entity_type": "update", "entity_name": "update",      "category": "diagnostic" }
+            ],
+            "3": [
+               { "type": "STATE",              "entity_type": "switch", "entity_name": "switch" }
+            ],
+            "6": [
+               { "type": "CURRENT",            "entity_type": "sensor", "entity_name": "current",   "device_class": "current",   "unit": "mA" },
+               { "type": "POWER",              "entity_type": "sensor", "entity_name": "power",     "device_class": "power",     "unit": "W"  },
+               { "type": "VOLTAGE",            "entity_type": "sensor", "entity_name": "voltage",   "device_class": "voltage",   "unit": "V"  },
+               { "type": "FREQUENCY",          "entity_type": "sensor", "entity_name": "frequency", "device_class": "frequency", "unit": "Hz" },
+               { "type": "ENERGY_COUNTER",     "entity_type": "sensor", "entity_name": "energy",    "device_class": "energy",    "unit": "Wh", "state_class": "total_increasing" }
+            ]
+         },
+         "HmIP-BSM": {
+            "0": [
+               { "type": "ACTUAL_TEMPERATURE", "entity_type": "sensor", "entity_name": "temperature", "device_class": "temperature", "unit": "°C", "enabled": false },
+               { "type": "UPDATE",             "entity_type": "update", "entity_name": "update",      "category": "diagnostic" }
+            ],
+            "4": [
+               { "type": "STATE",              "entity_type": "light", "entity_name": "light",        "schema": "template" }
+            ],
+            "7": [
+               { "type": "CURRENT",            "entity_type": "sensor", "entity_name": "current",   "device_class": "current",   "unit": "mA" },
+               { "type": "POWER",              "entity_type": "sensor", "entity_name": "power",     "device_class": "power",     "unit": "W"  },
+               { "type": "VOLTAGE",            "entity_type": "sensor", "entity_name": "voltage",   "device_class": "voltage",   "unit": "V"  },
+               { "type": "FREQUENCY",          "entity_type": "sensor", "entity_name": "frequency", "device_class": "frequency", "unit": "Hz" },
+               { "type": "ENERGY_COUNTER",     "entity_type": "sensor", "entity_name": "energy",    "device_class": "energy",    "unit": "Wh", "state_class": "total_increasing" }
+            ]
+         },
+         "HmIP-BROLL": {
+            "0": [
+               { "type": "ACTUAL_TEMPERATURE", "entity_type": "sensor", "entity_name": "temperature", "device_class": "temperature", "unit": "°C", "enabled": false },
+               { "type": "UPDATE",             "entity_type": "update", "entity_name": "update",      "category": "diagnostic" }
+            ],
+            "4": [
+               { "type": "LEVEL",              "entity_type": "cover",  "entity_name": "state" },
+               { "type": "LEVEL",              "entity_type": "number", "entity_name": "position" }
+            ]
+         },
+         "HM-Sec-SCo": {
+            "1": [
+               { "type": "LOWBAT",             "entity_type": "binary_sensor", "entity_name": "battery", "device_class": "battery", "availability_check": false, "category": "diagnostic" },
+               { "type": "STATE",              "entity_type": "binary_sensor", "entity_name": "state",   "device_class": "door",    "availability_check": false, "icon": "mdi:door-closed" }
+            ]
+         },
+         "HmIP-SRH": {
+            "0": [
+               { "type": "LOW_BAT",            "entity_type": "binary_sensor", "entity_name": "battery",           "category": "diagnostic", "device_class": "battery" },
+               { "type": "SABOTAGE",           "entity_type": "binary_sensor", "entity_name": "sabotage",          "category": "diagnostic", "enabled": false },
+               { "type": "OPERATING_VOLTAGE",  "entity_type": "sensor",        "entity_name": "operating_voltage", "category": "diagnostic", "enabled": false, "device_class": "voltage", "unit": "V" },
+               { "type": "UPDATE",             "entity_type": "update",        "entity_name": "update",            "category": "diagnostic" }
+            ],
+            "1": [
+               { "type": "STATE",              "entity_type": "sensor",        "entity_name": "state", "value_template": "{{ [\"Geschlossen\", \"Gekippt\", \"Offen\"][value_json.v|int] }}", "icon": "mdi:door-closed", "state_class": "-" }
+            ]
+         },
+         "HM-RC-8": {
+            "1": [
+               { "type": "PRESS_SHORT", "entity_type": "binary_sensor", "entity_name": "t1s_press_short" },
+               { "type": "PRESS_LONG",  "entity_type": "binary_sensor", "entity_name": "t1l_press_long" }
+            ],
+            "2": [
+               { "type": "PRESS_SHORT", "entity_type": "binary_sensor", "entity_name": "t2s_press_short" },
+               { "type": "PRESS_LONG",  "entity_type": "binary_sensor", "entity_name": "t2l_press_long" }
+            ],
+            "3": [
+               { "type": "PRESS_SHORT", "entity_type": "binary_sensor", "entity_name": "t3s_press_short" },
+               { "type": "PRESS_LONG",  "entity_type": "binary_sensor", "entity_name": "t3l_press_long" }
+            ],
+            "4": [
+               { "type": "PRESS_SHORT", "entity_type": "binary_sensor", "entity_name": "t4s_press_short" },
+               { "type": "PRESS_LONG",  "entity_type": "binary_sensor", "entity_name": "t4l_press_long" }
+            ],
+            "5": [
+               { "type": "PRESS_SHORT", "entity_type": "binary_sensor", "entity_name": "t5s_press_short" },
+               { "type": "PRESS_LONG",  "entity_type": "binary_sensor", "entity_name": "t5l_press_long" }
+            ],
+            "6": [
+               { "type": "PRESS_SHORT", "entity_type": "binary_sensor", "entity_name": "t6s_press_short" },
+               { "type": "PRESS_LONG",  "entity_type": "binary_sensor", "entity_name": "t6l_press_long" }
+            ],
+            "7": [
+               { "type": "PRESS_SHORT", "entity_type": "binary_sensor", "entity_name": "t7s_press_short" },
+               { "type": "PRESS_LONG",  "entity_type": "binary_sensor", "entity_name": "t7l_press_long" }
+            ],
+            "8": [
+               { "type": "PRESS_SHORT", "entity_type": "binary_sensor", "entity_name": "t8s_press_short" },
+               { "type": "PRESS_LONG",  "entity_type": "binary_sensor", "entity_name": "t8l_press_long" }
+            ]
+         },
+         "HM-WDS10-TH-O": {
+            "0": [
+               { "type": "LOWBAT",     "entity_type": "binary_sensor", "entity_name": "battery",     "category": "diagnostic", "device_class": "battery", "availability_check": false },
+               { "type": "UPDATE",     "entity_type": "update",        "entity_name": "update",      "category": "diagnostic" }
+            ],
+            "1": [
+               { "type": "HUMIDITY",    "entity_type": "sensor", "entity_name": "humidity",    "availability_check": false, "unit": "%" },
+               { "type": "TEMPERATURE", "entity_type": "sensor", "entity_name": "temperature", "availability_check": false, "unit": "°C" }
+            ]
+         }
+      }
+   }
+}
