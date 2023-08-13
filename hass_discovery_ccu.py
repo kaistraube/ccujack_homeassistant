@@ -226,11 +226,11 @@ class Ccu2Hass:
             continue
 
          # Send CCU-Jack device metadata MQTT Message
-         timestamp = datetime.today().strftime('%s') + '000'
-         mqtt_topic = f"{self.ccu_mqtt_topic_prefix}/status/{device_info_dict['href']}/metadata/name"
+         device_dict = self._http_request(f"{self.url_ccu_jack}/device/{device_info_dict['href']}")
+         timestamp   = datetime.today().strftime('%s') + '000'
+         mqtt_topic  = f"{self.ccu_mqtt_topic_prefix}/status/{device_info_dict['href']}/metadata/name"
          os.system("mosquitto_pub %s -t %s -m '{ \"ts\": %s, \"v\": \"%s\"}'" % (self.hass_mqtt_pub_opt, mqtt_topic, timestamp, device_dict.get('title', 'title_unknown')))
 
-         device_dict  = self._http_request(f"{self.url_ccu_jack}/device/{device_info_dict['href']}")
          channel_list = device_dict.get('~links', [])
          for channel_info_dict in channel_list:
             if channel_info_dict.get('rel', 'unknown') != 'channel':
