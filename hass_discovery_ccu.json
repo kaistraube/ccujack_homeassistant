@@ -81,9 +81,18 @@
                { "type": "ACTUAL_TEMPERATURE", "entity_type": "sensor", "entity_name": "temperature", "device_class": "temperature", "unit": "°C", "enabled": false },
                { "type": "UPDATE",             "entity_type": "update", "entity_name": "update",      "category": "diagnostic" }
             ],
-            "4": [
+            "3": [
                { "type": "LEVEL",              "entity_type": "cover",  "entity_name": "state" },
-               { "type": "LEVEL",              "entity_type": "number", "entity_name": "position" }
+               { "type": "LEVEL",              "entity_type": "sensor", "entity_name": "real_position", "value_template": "{{ value_json.v * 100 }}", "unit": "%" },
+               { "type": "LEVEL",              "entity_type": "device_automation", "entity_name": "press_short_up",   "payload": "up" },
+               { "type": "LEVEL",              "entity_type": "device_automation", "entity_name": "press_short_down", "payload": "down" },
+               { "type": "LEVEL",              "entity_type": "device_automation", "entity_name": "press_short_stop", "payload": "stop" }
+            ],
+            "4": [
+               { "type": "LEVEL",              "entity_type": "number",            "entity_name": "position" },
+               { "type": "LEVEL",              "entity_type": "button",            "entity_name": "button_up",   "command_template": "{ \"v\": 1.0 }",  "icon": "mdi:arrow-up" },
+               { "type": "LEVEL",              "entity_type": "button",            "entity_name": "button_down", "command_template": "{ \"v\": 0.0 }",  "icon": "mdi:arrow-down" },
+               { "type": "STOP",               "entity_type": "button",            "entity_name": "button_stop", "command_template": "{ \"v\": true }", "icon": "mdi:stop" }
             ]
          },
          "HM-Sec-SCo": {
