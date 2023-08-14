@@ -167,12 +167,14 @@ class Ccu2Hass:
          mqtt_device_discovery_data['state_topic'] = f"{self.ccu_mqtt_topic_prefix}/status/{device_id}/{channel}/{channel_type}"
          mqtt_device_discovery_data['payload_on'] = 'True'
          mqtt_device_discovery_data['payload_off'] = 'False'
+      elif entity_type == 'button':
+         mqtt_device_discovery_data['command_topic'] = f"{self.ccu_mqtt_topic_prefix}/set/{device_id}/{channel}/{channel_type}"
       elif entity_type == 'update':
          mqtt_device_discovery_data['state_topic'] = f"{self.ccu_mqtt_topic_prefix}/status/{device_id}/metadata/current_version"
          mqtt_device_discovery_data['latest_version_topic'] = f"{self.ccu_mqtt_topic_prefix}/status/{device_id}/metadata/available_version"
          mqtt_device_discovery_data['latest_version_template'] = '{{ value_json.v }}'
       elif entity_type == 'number':
-         mqtt_device_discovery_data['state_topic'] = f"{self.ccu_mqtt_topic_prefix}/status/{device_id}/{channel}/{channel_type}"
+         mqtt_device_discovery_data['state_topic'] = f"{self.ccu_mqtt_topic_prefix}/status/{device_id}/3/{channel_type}"
          mqtt_device_discovery_data['value_template'] = '{{ value_json.v * 100 }}'
          mqtt_device_discovery_data['command_topic'] = f"{self.ccu_mqtt_topic_prefix}/set/{device_id}/{channel}/{channel_type}"
          mqtt_device_discovery_data['command_template'] = '{ "v": {{ value|int / 100}} }'
@@ -185,10 +187,16 @@ class Ccu2Hass:
          mqtt_device_discovery_data['value_template'] = '{% if value_json.v > 0.50 %} open {% else %} closed {% endif %}'
          mqtt_device_discovery_data['position_topic'] = f"{self.ccu_mqtt_topic_prefix}/status/{device_id}/{channel}/{channel_type}"
          mqtt_device_discovery_data['position_template'] = '{{ value_json.v * 100 }}'
-         mqtt_device_discovery_data['command_topic'] = f"{self.ccu_mqtt_topic_prefix}/set/{device_id}/{channel}/{channel_type}"
-         mqtt_device_discovery_data['payload_open']  = '{ "v": 1.00 }'
-         mqtt_device_discovery_data['payload_close'] = '{ "v": 0.9 }'
-         #mqtt_device_discovery_data['payload_stop']  = ''
+         mqtt_device_discovery_data['command_topic'] = f"{self.ccu_mqtt_topic_prefix}/set/{device_id}/{channel}/{channel_type}_action"
+         mqtt_device_discovery_data['payload_open']  = '{ "v": "up" }'
+         mqtt_device_discovery_data['payload_close'] = '{ "v": "down" }'
+         mqtt_device_discovery_data['payload_stop']  = '{ "v": "stop" }'
+      elif entity_type == 'device_automation':
+         mqtt_device_discovery_data['automation_type'] = 'trigger'
+         mqtt_device_discovery_data['topic'] = f"{self.ccu_mqtt_topic_prefix}/set/{device_id}/{channel}/{channel_type}_action"
+         mqtt_device_discovery_data['payload'] = channel_template['payload']
+         mqtt_device_discovery_data['type'] = 'button_short_press'
+         mqtt_device_discovery_data['subtype'] = channel_template['entity_name']
 
       # overwrite determined data with given data
       if 'state_class' in channel_template and channel_template['state_class'] == '-':
@@ -199,6 +207,9 @@ class Ccu2Hass:
 
       if 'value_template' in channel_template:
          mqtt_device_discovery_data['value_template'] = channel_template['value_template']
+
+      if 'command_template' in channel_template:
+         mqtt_device_discovery_data['command_template'] = channel_template['command_template']
 
       if 'enabled' in channel_template:
          mqtt_device_discovery_data['enabled_by_default'] = channel_template['enabled']
